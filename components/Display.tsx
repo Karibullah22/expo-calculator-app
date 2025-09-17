@@ -1,15 +1,30 @@
 import { Text, View } from "react-native";
 
 interface Props {
-  input: string;
+  expression: string;
   result: string;
 }
 
-export default function Display({ input, result }: Props) {
+export default function Display({ expression, result }: Props) {
   return (
-    <View className="mb-4">
-      <Text className="text-right text-gray-400 text-lg">{input}</Text>
-      <Text className="text-right text-white text-3xl font-bold">{result}</Text>
+    <View className="mb-6">
+      {/* Expression on top */}
+      <Text
+        className="text-right text-gray-400 text-xl"
+        numberOfLines={1}
+        ellipsizeMode="head"
+      >
+        {expression}
+      </Text>
+
+      {/* Result clearly below */}
+      <Text
+        className="text-right text-white text-5xl font-bold mt-2"
+        numberOfLines={1}
+        ellipsizeMode="head"
+      >
+        {result}
+      </Text>
     </View>
   );
 }

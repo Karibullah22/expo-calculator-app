@@ -1,50 +1,55 @@
-# Welcome to your Expo app 👋
+📱 React Native Calculator
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern calculator app built with React Native, TypeScript, and Expo.
+Designed with Tailwind CSS (NativeWind) for styling and expo-router for smooth navigation.
+Features a clean UI, calculation history with AsyncStorage, and offline support.
 
-## Get started
+✨ Features
 
-1. Install dependencies
+🧮 Perform basic calculations (+, −, ×, ÷, %, √, parentheses).
 
-   ```bash
-   npm install
-   ```
+🎨 Modern UI with Tailwind CSS.
 
-2. Start the app
+📜 Persistent history with AsyncStorage.
 
-   ```bash
-   npx expo start
-   ```
+⚡ Built with Expo for easy dev & deployment.
 
-In the output, you'll find options to open the app in a
+🔄 Navigation using expo-router.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+🌓 Dark theme optimized.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+🚀 Getting Started
+# Clone repository
+git clone https://github.com/yourusername/calculator.git
+cd calculator
 
-When you're ready, run:
+# Install dependencies
+pnpm install
 
-```bash
-npm run reset-project
-```
+# Start Expo
+pnpm expo start
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+📂 Project Structure
+app/
+ ├── index.tsx        # Calculator screen
+ ├── history.tsx      # History screen
+components/
+ ├── Display.tsx      # Display input & results
+ ├── Button.tsx       # Calculator buttons
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+ 🛠️ Tech Stack
 
-## Join the community
+React Native
 
-Join our community of developers creating universal apps.
+Expo
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+TypeScript
+
+Tailwind CSS (NativeWind)
+
+AsyncStorage
+
+expo-router

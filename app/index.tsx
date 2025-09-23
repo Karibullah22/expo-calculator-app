@@ -1,5 +1,4 @@
-// inside app/index.tsx (full file expected)
-// ... other imports ...
+// app/index.tsx
 import { evaluateExpression } from "@/utils/Calculator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
@@ -65,6 +64,11 @@ export default function CalculatorScreen() {
         setResult("");
         return;
       }
+      if (val === "⌫") {
+        // Delete/backspace
+        setExpression((p) => p.slice(0, -1));
+        return;
+      }
       if (val === "=") {
         try {
           const value = evaluateExpression(expression);
@@ -78,7 +82,6 @@ export default function CalculatorScreen() {
         return;
       }
       if (val === "±") {
-        // toggle sign of the last number (or start negative)
         if (!expression) {
           setExpression("-");
           return;
@@ -94,7 +97,6 @@ export default function CalculatorScreen() {
         return;
       }
       if (val === "√") {
-        // insert sqrt with opening parenthesis for easier composition
         setExpression((p) => p + "√(");
         return;
       }

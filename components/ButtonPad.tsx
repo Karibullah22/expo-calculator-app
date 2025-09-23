@@ -1,3 +1,4 @@
+// ButtonPad.tsx
 import React, { useCallback } from "react";
 import { Pressable, Text, View } from "react-native";
 
@@ -6,8 +7,8 @@ type Props = {
 };
 
 const ROWS: string[][] = [
-  ["C", "(", ")", "÷"],
-  ["7", "8", "9", "×"],
+  ["C", "(", ")", "÷", "⌫"],
+  ["7", "8", "9", "×", "^"], // ◀️ Added Exponent (^)
   ["4", "5", "6", "−"],
   ["1", "2", "3", "+"],
   ["±", "0", ".", "="],
@@ -20,10 +21,12 @@ const ButtonPad: React.FC<Props> = ({ onPress }) => {
       const variant =
         label === "="
           ? "bg-black/80"
-          : ["÷", "×", "-", "+", "−"].includes(label)
-          ? "bg-gray-100"
+          : ["÷", "×", "-", "+", "−", "^"].includes(label)
+          ? "bg-gray-100" // ◀️ Added '^' to this list
           : label === "C"
           ? "bg-red-400"
+          : label === "⌫"
+          ? "bg-yellow-300" // ◀️ Added style for delete key
           : "bg-white";
 
       const textColor =

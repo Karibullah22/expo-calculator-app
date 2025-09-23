@@ -22,26 +22,28 @@ export function evaluateExpression(input: string): number {
 
   // --- Handle square tokens (²)
   // 1) (expr)² => Math.pow((expr), 2)
-  //    handle non-nested parentheses (most common use)
   s = s.replace(/\(([^()]+)\)²/g, "Math.pow(($1),2)");
   // 2) number² => Math.pow(number,2)
   s = s.replace(/([0-9]+(?:\.[0-9]+)?)²/g, "Math.pow($1,2)");
+
+  // --- Handle exponent operator (^)
+  // Supports (expr)^(expr) or number^number
+  s = s.replace(
+    /(\([^()]+\)|[0-9]+(?:\.[0-9]+)?)\^(\([^()]+\)|[0-9]+(?:\.[0-9]+)?)/g,
+    "Math.pow($1,$2)"
+  );
 
   // --- Handle percentage (postfix)
   // number% => (number/100)
   s = s.replace(/([0-9]+(?:\.[0-9]+)?)%/g, "($1/100)");
 
-  // For safety: disallow characters that are not digits, operators, parentheses, dot, Math, pow, sqrt, and commas
-  // Allowed letters come from Math, pow, sqrt
-  const safePattern = /^[0-9+\-*/().,Mathpowsqrt\s]+$/;
-  // However the string contains letters like 'Math' and 'pow' and 'sqrt'. To keep validation simple:
+  // --- Safety check
+  // Allow only digits, math ops, parentheses, dots, commas, and safe Math functions
+  const safePattern = /^[0-9+\-*/().,^Mathpowsqrt\s]+$/;
   if (!safePattern.test(s)) {
-    // try a slightly more permissive check but still block suspicious tokens
-    // disallow letters other than m,a,t,h,p,o,w,s,q,r (letters in "Mathpowsqrt")
-    if (/[^0-9+\-*/().,A-Za-z0-9\s]/.test(s)) {
+    if (/[^0-9+\-*/().,^A-Za-z0-9\s]/.test(s)) {
       throw new Error("Invalid characters in expression");
     }
-    // disallow usage of suspicious globals like "console", "window", "__", etc.
     const forbidden = [
       "console",
       "window",
@@ -58,14 +60,14 @@ export function evaluateExpression(input: string): number {
     }
   }
 
-  // At this point s should be mostly numeric JS expression using Math.sqrt and Math.pow.
-  // Evaluate using Function constructor (local app, controlled content).
+  // --- Evaluate using Function constructor (safe in this controlled context)
   try {
     // eslint-disable-next-line no-new-func
     const fn = new Function(`return (${s});`);
     const val = fn();
-    if (typeof val !== "number" || !isFinite(val))
+    if (typeof val !== "number" || !isFinite(val)) {
       throw new Error("Invalid result");
+    }
     return val;
   } catch (e) {
     throw new Error("Could not evaluate expression");

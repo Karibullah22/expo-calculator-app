@@ -7,19 +7,19 @@ interface Props {
 
 export default function Display({ expression, result }: Props) {
   return (
-    <View className="mb-6">
+    <View className="mb-6 flex-1 justify-end px-4">
       {/* Expression on top */}
       <Text
-        className="text-right text-gray-400 text-xl"
+        className="text-right text-black text-3xl"
         numberOfLines={1}
         ellipsizeMode="head"
       >
         {expression}
       </Text>
 
-      {/* Result clearly below */}
+      {/* Result below in orange */}
       <Text
-        className="text-right text-white text-5xl font-bold mt-2"
+        className="text-right text-orange-400 text-5xl font-bold mt-2"
         numberOfLines={1}
         ellipsizeMode="head"
       >

@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+// components/Display.tsx
+import { StyleSheet, Text, View } from "react-native";
 
 interface Props {
   expression: string;
@@ -7,24 +8,35 @@ interface Props {
 
 export default function Display({ expression, result }: Props) {
   return (
-    <View className="mb-6 flex-1 justify-end px-4">
+    <View style={styles.container}>
       {/* Expression on top */}
-      <Text
-        className="text-right text-black text-3xl"
-        numberOfLines={1}
-        ellipsizeMode="head"
-      >
-        {expression}
-      </Text>
+      <Text style={styles.expression}>{expression || ""}</Text>
 
-      {/* Result below in orange */}
-      <Text
-        className="text-right text-orange-400 text-5xl font-bold mt-2"
-        numberOfLines={1}
-        ellipsizeMode="head"
-      >
-        {result}
-      </Text>
+      {/* Result below */}
+      <Text style={styles.result}>{result || ""}</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 24,
+    marginBottom: 4,
+    justifyContent: "center",
+    paddingHorizontal: 16,
+  },
+  expression: {
+    textAlign: "right",
+    color: "#000",
+    fontSize: 50,
+    fontWeight: "400",
+  },
+  result: {
+    textAlign: "right",
+    color: "orange",
+    fontSize: 40,
+    fontWeight: "bold",
+    marginTop: 8,
+  },
+});

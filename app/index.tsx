@@ -3,7 +3,7 @@ import { evaluateExpression } from "@/utils/Calculator";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { Alert, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ButtonPad from "../components/ButtonPad";
 import Display from "../components/Display";
@@ -107,17 +107,8 @@ export default function CalculatorScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <View className="flex-row items-center justify-between px-4 py-2">
-        <TouchableOpacity
-          onPress={() => router.push("/history")}
-          className="px-3 py-1 rounded-md bg-primary"
-        >
-          <Text className="text-white">History</Text>
-        </TouchableOpacity>
-      </View>
-
       <View className="flex-1 justify-between">
-        <View className="px-4">
+        <View className="flex-1 bg-black/5">
           <Display expression={expression} result={result} />
         </View>
 
